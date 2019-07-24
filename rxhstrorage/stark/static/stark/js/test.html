@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table id="table-excel">
+    <thead>
+    <tr class="noExl">
+        <td>class为noExl的不会被导出到excel</td>
+        <td>class为noExl的不会被导出到excel</td>
+    </tr>
+    <tr>
+        <td>111111111</td>
+        <td>111111111</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>222222222</td>
+        <td>222222222</td>
+    </tr>
+    <tr>
+        <td>333333333</td>
+        <td>333333333</td>
+    </tr>
+    <tr>
+        <td>444444444</td>
+        <td>444444444</td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="2">合并单元格</td>
+    </tr>
+    </tfoot>
+</table>
+
+
+<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="jquery.table2excel.js"></script>
+<script>
+    $("#table-excel").table2excel({
+        exclude: ".noExl", //不被导出的表格行的CSS class类
+        name: "Excel Name", //导出的excel文档名称
+        filename: "myExcelTable" //excel文件的名称
+    })
+</script>
+</body>
+</html>

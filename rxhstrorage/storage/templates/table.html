@@ -1,0 +1,111 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+    <div class="panel panel-primary">
+        <div class="panel-body">
+
+
+            <table class="table table-bordered table-hover" id="table-excel"
+                   style='vertical-align: middle;text-align: center;'>
+                <tr>
+                    <td colspan="8">
+                        <h1>原料出库单</h1>
+                    </td>
+                </tr>
+                <tr>
+                    <td class='center'><h4>科目</h4></td>
+                    <td colspan="5"><h4>创建时间：{{ time }}</h4></td>
+                    <td colspan="2"><h4>对方科目</h4></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="2">产品名称：{{ title }}</td>
+                    <td>单位</td>
+                    <td>数量</td>
+                    <td>单价</td>
+                    <td>金额</td>
+                    <td>备注</td>
+                </tr>
+                {% for k,row in data.items %}
+
+                    <tr>
+                        <td></td>
+                        <td>
+                            {% if row.cls %}
+                                {{ row.cls.cls }}
+                            {% else %}
+                                空白
+                            {% endif %}
+
+                        </td>
+                        <td>
+                            {% if row.mat %}
+                                {{ row.mat }}
+                            {% else %}
+                                空白
+                            {% endif %}
+                        </td>
+                        <td>KG</td>
+                        <td>
+                            {{ row.amount }}
+                        </td>
+                        <td>
+                            {{ row.unit_price }}
+                        </td>
+                        <td>
+                            {{ row.price }}
+                        </td>
+                        <td>
+                            {{ row.remarks }}
+                        </td>
+                    </tr>
+
+
+
+                {% endfor %}
+
+                <tr>
+                    <td>主管：</td>
+                    <td>
+                        {{ master }}
+                    </td>
+                    <td>
+                        会计：
+                    </td>
+                    <td>
+                        {{ accountant }}
+                    </td>
+                    <td>
+                        保管员：
+                    </td>
+                    <td>
+                        {{ locker }}
+                    </td>
+                    <td>
+                        经手人：
+                    </td>
+                    <td>
+                        {{ handler }}
+                    </td>
+                </tr>
+            </table>
+            <button class="btn-sm btn-success pull-right" id="export">导出</button>
+
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block js %}
+    <script>
+        $("#export").click(function () { //点击按钮执行导出
+            $(".table").table2excel({ //选取导出的表格
+                filename: "原材料出库单", //导出的文件名
+                exclude_img: true, //是否导出图片
+                exclude_links: true,
+                exclude_inputs: true
+            });
+        });
+    </script>
+{% endblock %}
